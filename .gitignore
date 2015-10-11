@@ -70,5 +70,4 @@ src/main/webapp/META-INF
 .idea
 .gradle
 build
-gradle
 out
