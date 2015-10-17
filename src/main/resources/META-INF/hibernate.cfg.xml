@@ -18,10 +18,15 @@
         <!-- <mapping class="com.domain.TestEntity" /> -->
         <mapping class="com.codephobia.domain.user.User"/>
         <mapping class="com.codephobia.domain.snsuser.SnsUser"/>
-        <mapping class="com.codephobia.domain.request.Request"/>
         <mapping class="com.codephobia.domain.payment.Payment"/>
         <mapping class="com.codephobia.domain.account.Account"/>
         <mapping class="com.codephobia.domain.cardinfo.CardInfo"/>
+        <mapping class="com.codephobia.domain.accusation.Accusation" />
+        <mapping class="com.codephobia.domain.chat.Chat" />
+        <mapping class="com.codephobia.domain.request.Request"/>
+        <mapping class="com.codephobia.domain.request.RequestApply" />
+        <mapping class="com.codephobia.domain.request.RequestStatus" />
+        <mapping class="com.codephobia.domain.usergrade.UserGrade" />
 
     </session-factory>
 </hibernate-configuration>
