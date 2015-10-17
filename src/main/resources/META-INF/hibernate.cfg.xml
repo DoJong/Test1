@@ -16,6 +16,12 @@
 
         <!-- hibernate entity mapping -->
         <!-- <mapping class="com.domain.TestEntity" /> -->
+        <mapping class="com.codephobia.domain.user.User"/>
+        <mapping class="com.codephobia.domain.snsuser.SnsUser"/>
+        <mapping class="com.codephobia.domain.request.Request"/>
+        <mapping class="com.codephobia.domain.payment.Payment"/>
+        <mapping class="com.codephobia.domain.account.Account"/>
+        <mapping class="com.codephobia.domain.cardinfo.CardInfo"/>
 
     </session-factory>
 </hibernate-configuration>
