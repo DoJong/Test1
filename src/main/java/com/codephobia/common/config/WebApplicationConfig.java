@@ -31,8 +31,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.interfaces.controller"})
-@EnableJpaRepositories(basePackages = {"com.domain"})
+@ComponentScan(basePackages = {"com.codephobia.interfaces"})
+@EnableJpaRepositories(basePackages = {"com.codephobia.domain"})
 public class WebApplicationConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
