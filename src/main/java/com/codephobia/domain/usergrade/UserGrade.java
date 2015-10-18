@@ -1,5 +1,8 @@
 package com.codephobia.domain.usergrade;
 
+import com.codephobia.domain.request.Request;
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,17 +27,23 @@ public class UserGrade {
     /**
      * 에스코트 받은 유저의 키값 (카에리토모 리퀘스트를 요청한 유저)
      */
-    private Long escortedUserId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User escortedUser;
 
     /**
      * 에스코트를 해준 유저의 키값 (돈 받을 사람)
      */
-    private Long escortUserId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User escortUser;
 
     /**
      * 카에리토모 요청 데이터의 키값
      */
-    private Long requestId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Request request;
 
     /**
      * 간단한 평가 내용

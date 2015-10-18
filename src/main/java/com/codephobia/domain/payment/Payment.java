@@ -1,5 +1,9 @@
 package com.codephobia.domain.payment;
 
+import com.codephobia.domain.request.Request;
+import com.codephobia.domain.request.RequestApply;
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,22 +26,35 @@ public class Payment {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer paymentId;
+    private Long paymentId;
 
     /**
      * 요청에 대한 외래키
      */
-    private Integer requestId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Request request;
 
     /**
      * 요청 승인에 대한 외래키
      */
-    private Integer requestApplyId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private RequestApply requestApply;
 
     /**
-     * 지불할 사용자에 대한 외래키
+     * 지불할 사용자
      */
-    private Integer userId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User requestedUser;
+
+    /**
+     * 지불받을 사용자
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User acceptedUser;
 
     /**
      * 지불 방법(크래딧카드 or 페이팔)

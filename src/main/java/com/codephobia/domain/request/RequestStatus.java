@@ -1,5 +1,7 @@
 package com.codephobia.domain.request;
 
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +26,16 @@ public class RequestStatus {
     /**
      * 카에리토모 리퀘스트의 키값
      */
-    private Long requestId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Request request;
 
     /**
      * 카에리토모 요청에 대해 에스코트를 지원한 유저의 키값
      */
-    private Long requestApplierId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User requestApplier;
 
     /**
      * 카에리토모 요청의 현재 상태

@@ -1,5 +1,8 @@
 package com.codephobia.domain.chat;
 
+import com.codephobia.domain.request.Request;
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +27,16 @@ public class Chat {
     /**
      * 대화를 전송한 유저의 키 값
      */
-    private Long authorId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User user;
 
     /**
      * 카에리토모 요청의 키
      */
-    private Long request_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Request request;
 
     /**
      * 데이터 필드

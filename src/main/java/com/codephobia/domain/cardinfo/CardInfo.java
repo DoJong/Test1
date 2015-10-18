@@ -1,5 +1,7 @@
 package com.codephobia.domain.cardinfo;
 
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,17 +23,19 @@ public class CardInfo {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer cardInfoId;
+    private Long cardInfoId;
 
     /**
-     * 카드 소유주 외래키
+     * 카드 소유주
      */
-    private Integer userId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User user;
 
     /**
      * 카드 번호
      */
-    private Integer cardNumber;
+    private Long cardNumber;
 
     /**
      * 카드 종류

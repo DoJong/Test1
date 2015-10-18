@@ -1,11 +1,16 @@
 package com.codephobia.domain.request;
 
+import com.codephobia.domain.payment.Payment;
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by benimario on 15. 10. 17..
@@ -24,12 +29,16 @@ public class RequestApply {
     /**
      * 카에리토모 리퀘스트의 키값
      */
-    private Long requestId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Request request;
 
     /**
      * 카에리토모 요청에 대해 에스코트를 지원한 유저의 키값
      */
-    private Long requestApplierId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User requestApplier;
 
     /**
      * 에스코트 지원 상태
@@ -50,6 +59,10 @@ public class RequestApply {
      * 수정날짜
      */
     private Date modifiedDate;
+
+    @OneToMany(mappedBy = "requestApply", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Payment> payments;
 
     @PrePersist
     public void onCreate() {

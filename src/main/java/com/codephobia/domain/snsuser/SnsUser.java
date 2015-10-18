@@ -1,5 +1,7 @@
 package com.codephobia.domain.snsuser;
 
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,12 +25,14 @@ public class SnsUser {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer snsId;
+    private Long snsId;
 
     /**
      * user의 외래 키값
      */
-    private Integer userId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User snsUser;
 
     /**
      * 이메일

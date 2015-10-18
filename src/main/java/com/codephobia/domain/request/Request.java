@@ -1,11 +1,18 @@
 package com.codephobia.domain.request;
 
+import com.codephobia.domain.chat.Chat;
+import com.codephobia.domain.payment.Payment;
+import com.codephobia.domain.user.User;
+import com.codephobia.domain.usergrade.UserGrade;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by waldo on 2015-10-17.
@@ -22,12 +29,14 @@ public class Request {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer requestId;
+    private Long requestId;
 
     /**
      * 신청자 id의 외래키
      */
-    private Integer authorId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User author;
 
     /**
      * 실제 에스코트한 시간
@@ -83,6 +92,26 @@ public class Request {
      * 수정 날짜
      */
     private Date modifiedDate;
+
+    @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Chat> chats;
+
+    @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Payment> payments;
+
+    @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<RequestApply> requestApplies;
+
+    @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<RequestStatus> requestStatuses;
+
+    @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<UserGrade> userGrades;
 
     @PrePersist
     public void onCreate() {

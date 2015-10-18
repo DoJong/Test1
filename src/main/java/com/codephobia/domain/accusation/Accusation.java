@@ -1,5 +1,7 @@
 package com.codephobia.domain.accusation;
 
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,16 @@ public class Accusation {
     /**
      * 신고 당한 유저의 키값
      */
-    private Long accusedUserId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User accusedUser;
+
+    /**
+     * 신고한 유저의 키값
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User accuser;
 
     /**
      * 신고 내용

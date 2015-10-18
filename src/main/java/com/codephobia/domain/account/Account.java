@@ -1,5 +1,8 @@
 package com.codephobia.domain.account;
 
+import com.codephobia.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,12 +24,14 @@ public class Account {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer accountId;
+    private Long accountId;
 
     /**
-     * 계좌의 소유주에 대한 사용자 외래키
+     * 계좌의 소유주
      */
-    private Integer userId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User user;
 
     /**
      * 계좌 은행
